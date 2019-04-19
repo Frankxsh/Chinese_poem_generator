@@ -1,11 +1,4 @@
 # coding: UTF-8
-'''''''''''''''''''''''''''''''''''''''''''''''''''''
-   file name: main.py
-   create time: 2017年06月23日 星期五 16时41分54秒
-   author: Jipeng Huang
-   e-mail: huangjipengnju@gmail.com
-   github: https://github.com/hjptriplebee
-'''''''''''''''''''''''''''''''''''''''''''''''''''''
 from config import *
 import data
 import model
@@ -13,13 +6,14 @@ import model
 def defineArgs():
     """define args"""
     parser = argparse.ArgumentParser(description = "Chinese_poem_generator.")
-    parser.add_argument("-m", "--mode", help = "select mode by 'train' or test or head",
-                        choices = ["train", "test", "head"], default = "test")
+    parser.add_argument("--mode",help = "select mode by 'train' or test or head",
+                        choices = ["train", "test", "head"], default = "train")
+   #choices: 这个参数用来检查输入参数的范围。如：choices=[1,3,5]
     return parser.parse_args()
 
 if __name__ == "__main__":
     args = defineArgs()
-    trainData = data.POEMS(trainPoems)
+    trainData = data.POEMS(trainPoems)#train data是一个对象
     MCPangHu = model.MODEL(trainData)
     if args.mode == "train":
         MCPangHu.train()
