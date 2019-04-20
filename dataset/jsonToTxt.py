@@ -18,23 +18,26 @@ import json
 import os
 import re
 
-typeName = "poetrySong"
+if __name__ == '__main__':
+    typeName = "json"
 
-titleField = "title"
-contentField = "paragraphs"
-authorField = "author"
+    titleField = "title"
+    contentField = "paragraphs"
+    authorField = "author"
 
-jsonPath = "./" + typeName
-saveFile = open(os.path.join(jsonPath, typeName + ".txt"), "w")
+    jsonPath = "./" + typeName
+    saveFile = open(os.path.join(jsonPath, typeName + ".txt"), "w", encoding='utf-8')
 
-for file in os.listdir(jsonPath):
-    if os.path.isfile(os.path.join(jsonPath,file)) and re.match('(.*)(\.)(json)', file) != None:
-        print("processing file: %s" % file)
-        poems = json.load(open(os.path.join(jsonPath,file), "r"))
-        for singlePoem in poems:
-            content = "".join(singlePoem[contentField])
-            title = singlePoem[titleField]
-            author = singlePoem[authorField]
-            saveFile.write(title + "::" + author + "::" + content + "\n")
+    for file in os.listdir(jsonPath):
 
-saveFile.close()
+        if os.path.isfile(os.path.join(jsonPath, file)) and re.match('(.*)(\.)(json)', file) != None:
+            print("processing file: %s" % file)
+            poems = json.load(open(os.path.join(jsonPath, file), "r", encoding='utf-8'))
+            for singlePoem in poems:
+                content = "".join(singlePoem[contentField])
+                title = singlePoem[titleField]
+                author = singlePoem[authorField]
+                saveFile.write(title + "::" + author + "::" + content + "\n")
+
+    saveFile.close()
+    print('over')

@@ -7,7 +7,7 @@ class MODEL:
     def __init__(self, trainData):
         self.trainData = trainData
 
-    def buildModel(self, wordNum, gtX, hidden_units = 128, layers = 2):
+    def buildModel(self, wordNum, gtX, hidden_units = 128, layers = 2):#建立的神经网络的模型
         """build rnn"""
         with tf.variable_scope("embedding"): #embedding
             embedding = tf.get_variable("embedding", [wordNum, hidden_units], dtype = tf.float32)
